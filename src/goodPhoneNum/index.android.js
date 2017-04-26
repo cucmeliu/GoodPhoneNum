@@ -18,7 +18,7 @@ export default class goodPhoneNum extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {value: '', num: 0, expl:'', flag:'吉'};
   }
 
   getValue(xxx) {
@@ -26,11 +26,18 @@ export default class goodPhoneNum extends Component {
   }
 
   show(xx) {
-    alert(xx);
+    //alert(xx);
+    if (xx == null || xx.length == 0){
+
+    } else {
+      var ex = xx.split(' ');
+      this.setState({num: ex[0], expl: ex[1], flag: ex[2]});
+    }
   }
 
   getexp(num) {
     var goodexps = [
+      "0 ",
       "1 大展鸿图，信用得固，无远弗界，可获成功 吉",
       "2 根基不固，摇摇欲坠，一盛一衰，劳而无功 凶",
       "3 根深蒂固，蒸蒸日上，如意吉祥，百事顺遂 吉",
@@ -114,7 +121,6 @@ export default class goodPhoneNum extends Component {
       "81 最极之数，还本归元，能得繁业，发达成功 吉"
     ];
     return goodexps[num];
-
   }
 
   isGood(num) {
@@ -129,30 +135,54 @@ export default class goodPhoneNum extends Component {
   }
 
   recalNum(num) {
-
-		var iPart = num / 80;
+    if (isNaN(num) || (num.length != 11)) {
+      //this.setState({expl: '请输入纯数字11位手机号！'});
+      //alert('请输入纯数字11位手机号！')
+      return 0;
+    } else {
+      // 取最后4位
+      num = num.slice(-4);
+      //alert(num);
+		var iPart = parseInt(num / 80);
 		var fPart =  ((num / 80.0) - iPart);
+    //alert('aa:'+num);
 		return parseInt(fPart * 80);
+    }
 	}
+
+  _onPress(num) {
+    this.getexp(this.recalNum(num));
+  }
+
 
   render() {
     return (
       <View style={styles.container}>
+      <Text>
+      手机号码吉凶预测，是根据周易数理预测之原理，来测试手机号码对主人的运势影响。预测结果仅供参考！
+      </Text>
+
         <TextInput id='phonenum' placeholder='请输入手机号'
         onChangeText={this.getValue.bind(this)}
         value={this.state.value} >
         </TextInput>
 
         <TouchableHighlight
-          onPress={this.show.bind(this, this.recalNum(this.state.value))}>
-          <Text style={styles.btnText}>计算</Text>
+          onPress={this.show.bind(this, this.getexp(this.recalNum(this.state.value)))}>
+          <Text style={styles.btnText}>预测</Text>
         </TouchableHighlight>
 
-        <Text style={styles.instructions}>
-          数字：{'\n'}
-          详解：{'\n'}
-          总评：{'\n'}
+        <View >
+        <Text>
+          数字：{this.state.num}
         </Text>
+        <Text>
+          详解：{this.state.expl}
+        </Text>
+        <Text>
+          总评：{this.state.flag}
+        </Text>
+        </View>
       </View>
     );
   }
