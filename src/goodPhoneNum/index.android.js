@@ -158,31 +158,42 @@ export default class goodPhoneNum extends Component {
   render() {
     return (
       <View style={styles.container}>
-      <Text>
-      手机号码吉凶预测，是根据周易数理预测之原理，来测试手机号码对主人的运势影响。预测结果仅供参考！
-      </Text>
+        <Text style={styles.title}>
+          号码吉凶
+        </Text>
 
-        <TextInput id='phonenum' placeholder='请输入手机号'
+        <TextInput style={styles.txtInput}
+        id='phonenum' placeholder='请输入手机号'
         onChangeText={this.getValue.bind(this)}
         value={this.state.value} >
         </TextInput>
 
-        <TouchableHighlight
+        <TouchableHighlight style={styles.btnHighLight}
           onPress={this.show.bind(this, this.getexp(this.recalNum(this.state.value)))}>
           <Text style={styles.btnText}>预测</Text>
         </TouchableHighlight>
 
+        <Text style={styles.txtHint}>
+        {'\n'}
+        手机号码吉凶预测，是根据周易数理预测之原理，来测试手机号码对主人的运势影响。预测结果仅供参考！
+        {'\n'}
+        </Text>
+
         <View >
-        <Text>
-          数字：{this.state.num}
-        </Text>
-        <Text>
-          详解：{this.state.expl}
-        </Text>
-        <Text>
-          总评：{this.state.flag}
-        </Text>
+          <Text style={styles.txtResult}>
+            数字：{this.state.num}
+          </Text>
+          <Text style={styles.txtResult}>
+            详解：{this.state.expl}
+          </Text>
+          <Text style={styles.txtResult}>
+            总评：{this.state.flag}
+          </Text>
         </View>
+        <Text style={styles.txtCopyright}>
+        {'\n'}{'\n'}{'\n'}
+          Copyright: leo@ikohoo 2015-2017
+        </Text>
       </View>
     );
   }
@@ -195,18 +206,41 @@ const styles = StyleSheet.create({
     //alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+  title: {
+    fontSize: 30,
+    textAlign: 'center',
+    color: 'green',
+    backgroundColor: 'red',
+  },
+  txtInput:{
+      fontSize: 30,
+      //color: 'gray',
+      margin: 20,
+      borderColor: 'gray'
+  },
   btnHighLight: {
+    //color:'red',
+    borderColor: 'gray',
+    borderRadius: 2,
+    borderWidth: 1,
     backgroundColor: 'blue',
+    margin: 20,
   },
   btnText: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
+  txtHint: {
+    margin: 10,
+  },
+  txtResult: {
+    fontSize: 20,
+    margin: 10,
+  },
+  txtCopyright: {
     textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    bottom: 10,
   },
 });
 
