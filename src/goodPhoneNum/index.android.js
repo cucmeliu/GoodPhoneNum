@@ -159,7 +159,8 @@ export default class goodPhoneNum extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>
-          号码吉凶
+          手机号码吉凶预测
+          {'\n'}
         </Text>
 
         <TextInput style={styles.txtInput}
@@ -180,15 +181,15 @@ export default class goodPhoneNum extends Component {
         </Text>
 
         <View >
+        
+
           <Text style={styles.txtResult}>
-            数字：{this.state.num}
+            总评：{this.state.flag}
           </Text>
           <Text style={styles.txtResult}>
             详解：{this.state.expl}
           </Text>
-          <Text style={styles.txtResult}>
-            总评：{this.state.flag}
-          </Text>
+
         </View>
         <Text style={styles.txtCopyright}>
         {'\n'}{'\n'}{'\n'}
@@ -209,8 +210,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     textAlign: 'center',
-    color: 'green',
-    backgroundColor: 'red',
+    color: 'white',
+    backgroundColor: '#0faaea',
   },
   txtInput:{
       fontSize: 30,
@@ -223,11 +224,12 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderRadius: 2,
     borderWidth: 1,
-    backgroundColor: 'blue',
+    backgroundColor: '#0faaea',
     margin: 20,
   },
   btnText: {
     fontSize: 20,
+    color: 'white',
     textAlign: 'center',
     margin: 10,
   },
